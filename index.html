@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>For Archi❤️</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Confetti library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #ffbad0 0%, #ffc3a0 100%);
+      --card-bg: rgba(255, 255, 255, 0.92);
+      --yes-color: #ff3b7a;
+      --yes-hover: #ff1f68;
+      --text-main: #4a4a4a;
+      --text-highlight: #d12e5f;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100dvh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--bg-gradient);
+      font-family: 'Nunito', sans-serif;
+      overflow: hidden;
+      color: var(--text-main);
+    }
+
+    /* --- Background Floating Icons --- */
+    .floating-icon {
+      position: absolute;
+      font-size: 3rem;
+      opacity: 0.6;
+      animation: floatIcon 6s ease-in-out infinite;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .icon-1 { top: 5%; left: 5%; animation-delay: 0s; }
+    .icon-2 { bottom: 10%; right: 5%; animation-delay: 1.5s; font-size: 4rem; }
+    .icon-3 { top: 15%; right: 10%; animation-delay: 3s; font-size: 2.5rem; }
+    .icon-4 { bottom: 15%; left: 10%; animation-delay: 4.5s; font-size: 3.5rem; }
+
+    @keyframes floatIcon {
+      0%, 100% { transform: translateY(0) rotate(-5deg); }
+      50% { transform: translateY(-20px) rotate(5deg); }
+    }
+
+    #confettiCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* --- Card --- */
+   .card {
+  position: relative;
+  z-index: 10;
+  width: 92%;
+  max-width: 520px;
+  min-height: 520px;
+  padding: 28px 20px;
+  max-height: 85vh; /* smaller than full screen */
+  height: auto; /* shrink to content */
+  background: var(--card-bg);
+  border-radius: 30px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: visible;
+  overflow-y: auto; /* scroll only if content too big */
+}
+
+
+    .card::-webkit-scrollbar { display: none; }
+    .card { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .art-container {
+      position: relative;
+      display: inline-block;
+      flex-shrink: 0;
+      margin-bottom: 10px;
+      /* Ensure container has minimum size to prevent layout jumps */
+      min-height: 180px; 
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Main Cat Art */
+    .art {
+      width: 180px;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 8px 12px rgba(0,0,0,0.1));
+      animation: heartbeat 2s infinite ease-in-out;
+    }
+    
+    /* The hidden container for the GIF */
+    #no-art {
+      display: none;
+      width: 180px; 
+      margin: 0 auto;
+    }
+    
+    #no-art img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+
+    h1 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: clamp(24px, 5vw, 36px);
+      margin: 10px 0 20px;
+      line-height: 1.3;
+      color: var(--text-highlight);
+      flex-shrink: 0;
+      width: 100%;
+    }
+
+    .name-highlight {
+      display: block;
+      font-size: 1.2em;
+      color: var(--yes-color);
+      margin-bottom: 5px;
+    }
+
+    .typewriter-text {
+  white-space: normal;
+  word-wrap: break-word;
+  text-align: center;
+}
+
+ 
+      margin: 0 auto;
+      letter-spacing: .05em; 
+      animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+      max-width: 100%;
+    }
+
+    @keyframes typing { from { width: 0 } to { width: 100% } }
+    @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: orange; } }
+
+    .button-zone {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  margin: 10px auto 0;
+  overflow: hidden;
+}
+
+
+    button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 15px 30px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    #yesBtn { left: 20%; background: var(--yes-color); color: #fff; z-index: 10; }
+    #noBtn { left: 60%; background: #ffffff; color: #666; border: 2px solid #f0f0f0; z-index: 5; }
+
+    /* Result Section */
+    .result {
+      display: none;
+      width: 100%;
+      animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .polaroid {
+      background: white;
+      padding: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      transform: rotate(-3deg);
+      display: inline-block;
+      margin: 15px 0;
+      border-radius: 4px;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .result-img {
+      width: 100%;
+      max-width: 280px;
+      height: auto;
+      display: block;
+      border-radius: 2px;
+    }
+
+    .result h2 {
+      color: var(--yes-color);
+      font-size: 32px;
+      margin: 0 0 5px;
+      font-family: 'Fredoka', sans-serif;
+    }
+
+    .date-idea-box {
+      margin-top: 10px;
+      padding: 15px;
+      background: rgba(255,255,255,0.6);
+      border-radius: 15px;
+      border: 2px dashed #ffbad0;
+      width: 100%;
+    }
+    .date-btn {
+      position: relative !important;
+      top: auto !important;
+      left: auto !important;
+      transform: none !important;
+      background: #fff !important;
+      color: var(--yes-color) !important;
+      border: 2px solid var(--yes-color) !important;
+      font-size: 16px !important;
+      padding: 10px 20px !important;
+      margin-top: 10px;
+    }
+
+    @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+    /* Mobile Logic */
+    @media (max-width: 500px) {
+      .card { width: 92vw; padding: 25px 15px; }
+      .art { width: 150px; }
+      #no-art { width: 150px; }
+      .button-zone { height: 200px; }
+      h1 { font-size: 22px; }
+      .typewriter-text { animation: none; border: none; white-space: normal; }
+      #yesBtn { left: 50%; transform: translate(-50%, -140%); top: 45%; }
+      #noBtn { left: 50%; transform: translate(-50%, 140%); top: 45%; }
+    }
+    body {
+min-height: 100vh;
+padding: 20px 0; /* space top & bottom */
+}
+  </style>
+</head>
+
+<body>
+  <div class="floating-icon icon-1">💌</div>
+  <div class="floating-icon icon-2">🌹</div>
+  <div class="floating-icon icon-3">🧸</div>
+  <div class="floating-icon icon-4">✨</div>
+
+  <canvas id="confettiCanvas"></canvas>
+
+  <main class="card" id="mainCard">
+    <!-- SVG ART (CAT) -->
+    <div class="art-container">
+      <svg id="art-svg" class="art" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <!-- Softer, Bigger Ears using curves -->
+        <path d="M30 75 Q35 5 90 45" fill="#fff" stroke="#4a4a4a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M170 75 Q165 5 110 45" fill="#fff" stroke="#4a4a4a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        
+        <!-- Head -->
+        <ellipse cx="100" cy="110" rx="85" ry="75" fill="#fff" stroke="#4a4a4a" stroke-width="4"/>
+        
+        <!-- Eyes -->
+        <circle cx="70" cy="100" r="8" fill="#4a4a4a"/>
+        <circle cx="130" cy="100" r="8" fill="#4a4a4a"/>
+        
+        <!-- Cheeks -->
+        <ellipse cx="60" cy="115" rx="10" ry="6" fill="#ffbad0" opacity="0.6"/>
+        <ellipse cx="140" cy="115" rx="10" ry="6" fill="#ffbad0" opacity="0.6"/>
+        
+        <!-- Mouth -->
+        <path d="M85 125 Q100 135 115 125" fill="none" stroke="#4a4a4a" stroke-width="3" stroke-linecap="round"/>
+        
+        <!-- Heart held by paws -->
+        <path d="M100 145 C100 135 85 130 80 140 C70 160 100 180 100 180 C100 180 130 160 120 140 C115 130 100 135 100 145 Z" fill="#ff3b7a" stroke="#d12e5f" stroke-width="2"/>
+        
+        <!-- Paws -->
+        <ellipse cx="75" cy="160" rx="12" ry="10" fill="#fff" stroke="#4a4a4a" stroke-width="3"/>
+        <ellipse cx="125" cy="160" rx="12" ry="10" fill="#fff" stroke="#4a4a4a" stroke-width="3"/>
+      </svg>
+      
+      <!-- DIRECT IMAGE for Ashy Snich (Stable) -->
+      <div id="no-art">
+         <img src="assets/no.gif" alt="Ashy Snich"/>
+      </div>
+    </div>
+
+    <!-- Initial Question -->
+    <div id="questionSection" style="width: 100%;">
+      <h1>
+        <span class="name-highlight">Archi 💖,</span>
+        <div class="typewriter-text">Will you be my Valentine?</div>
+      </h1>
+
+      <section class="button-zone" id="zone">
+        <button id="yesBtn">Yes! 💖</button>
+        <button id="noBtn">No</button>
+      </section>
+    </div>
+
+    <!-- Result (Hidden by default) -->
+    <section class="result" id="result">
+      <h2>YAY! 🎉</h2>
+      <p style="color: #666; margin-bottom: 5px;">I knew you'd say yes! ❤️</p>
+      
+      <!-- POLAROID FRAME -->
+      <div class="polaroid">
+        <!-- DIRECT IMAGE for Kiss Lip GIF (Stable) -->
+        <img 
+          class="result-img" 
+          src="assets/yes.gif" 
+          alt="Kiss Lip GIF"
+          onerror="this.src='https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif'"
+        />
+      </div>
+
+      <!-- DATE IDEA GENERATOR -->
+      <div class="date-idea-box">
+        <p>✨ <strong>Our First Date Idea:</strong></p>
+        <div id="dateIdea" style="font-weight: 700; color: #d12e5f; min-height: 24px;">???</div>
+        <button class="date-btn" onclick="generateDate()">Spin for Idea 🎲</button>
+      </div>
+    </section>
+  </main>
+  <script>
+    const zone = document.getElementById("zone");
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const questionSection = document.getElementById("questionSection");
+    const result = document.getElementById("result");
+    const mainCard = document.getElementById("mainCard");
+    
+    // Art elements
+    const artSvg = document.getElementById("art-svg");
+    const noArt = document.getElementById("no-art");
+    
+    const confettiCanvas = document.getElementById("confettiCanvas");
+    const confettiInstance = confetti.create(confettiCanvas, { resize: true, useWorker: true });
+    
+    function fireConfetti() {
+      const duration = 3000;
+      const end = Date.now() + duration;
+      (function frame() {
+        confettiInstance({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 } });
+        confettiInstance({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 } });
+        if (Date.now() < end) requestAnimationFrame(frame);
+      })();
+    }
+    
+    /* "NO" BUTTON LOGIC */
+    const noTexts = [
+    "No", "Are you sure?", "Really?", "Think again!", "Last chance!", 
+    "Surely not?", "You might regret this!", "Give it another thought!", 
+    "Are you absolutely certain?", "This could be a mistake!", "Have a heart!", 
+    "Don't be so cold!", "Change of heart?", "Wouldn't you reconsider?", 
+    "Is that your final answer?", "You're breaking my heart ;(", 
+    "Plsss? 🥺", "Pretty please? 🥺", "With a cherry on top?",
+    "Stop playing hard to get!", "I'm gonna cry...", "Do you hate me? 😭"
+    ];
+    let textIndex = 0;
+    let buttonScale = 1; 
+    
+    function moveNoBtn() {
+      const z = zone.getBoundingClientRect();
+      const b = noBtn.getBoundingClientRect();
+      const safeWidth = z.width - b.width;
+      const safeHeight = z.height - b.height;
+      const randomX = Math.random() * safeWidth;
+      const randomY = Math.random() * safeHeight;
+      
+      noBtn.style.left = `${randomX}px`;
+      noBtn.style.top = `${randomY}px`;
+      noBtn.style.transform = 'none'; 
+      
+      textIndex = (textIndex + 1) % noTexts.length;
+      noBtn.innerText = noTexts[textIndex];
+      
+      /* --- SWAP ART ON HOVER (Permanent until Yes) --- */
+      if (artSvg && noArt) {
+        artSvg.style.display = "none";
+        noArt.style.display = "block";
+      }
+      
+      buttonScale += 0.03; 
+      if (buttonScale > 2.5) {
+        yesBtn.style.position = "fixed";
+        yesBtn.style.top = "0";
+        yesBtn.style.left = "0";
+        yesBtn.style.width = "100vw";
+        yesBtn.style.height = "100vh";
+        yesBtn.style.transform = "none";
+        yesBtn.style.borderRadius = "0";
+        yesBtn.style.display = "flex";
+         yesBtn.style.justifyContent = "center";
+         yesBtn.style.alignItems = "center";
+         yesBtn.style.zIndex = "1000";
+         yesBtn.innerText = "YES! (You have no choice) 😈";
+         noBtn.style.display = "none";
+      } else {
+         if(window.innerWidth > 500) {
+           yesBtn.style.transform = `translateY(-50%) scale(${buttonScale})`;
+          } else {
+            yesBtn.style.transform = `translate(-50%, -140%) scale(${buttonScale})`;
+          }
+        }
+      }
+      
+      noBtn.addEventListener("mouseover", moveNoBtn);
+      noBtn.addEventListener("touchstart", (e) => { e.preventDefault(); moveNoBtn(); });
+      noBtn.addEventListener("click", (e) => { e.preventDefault(); moveNoBtn(); });
+      
+      /* YES BUTTON */
+      yesBtn.addEventListener("click", () => {
+        yesBtn.style.position = "absolute";
+        yesBtn.style.width = "auto";
+      yesBtn.style.height = "auto";
+      yesBtn.style.zIndex = "10";
+      
+      // Reset art back to default cat (for tidiness, though user won't see it)
+      if (artSvg && noArt) {
+        noArt.style.display = "none";
+        artSvg.style.display = "block";
+      }
+      
+      questionSection.style.display = "none";
+      result.style.display = "block";
+      fireConfetti();
+      mainCard.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+
+    /* DATE IDEAS */
+    const dateIdeas = [
+    "Movie Marathon 🍿", "Picnic in the Park 🧺", "Ice Cream Run 🍦", "Cooking Together 🍝", 
+      "Arcade Night 👾", "Sunset Walk 🌅", "Coffee & Books ☕", 
+      "Bowling Night 🎳", "Intense Makeout 💋"
+    ];
+  let firstSpin = true;
+   function generateDate() {
+  const ideaBox = document.getElementById("dateIdea");
+  let count = 0;
+
+  const interval = setInterval(() => {
+    // always show random DURING spinning
+    ideaBox.innerText = dateIdeas[Math.floor(Math.random() * dateIdeas.length)];
+    count++;
+
+    if (count > 15) {
+      clearInterval(interval);
+
+      // 🎯 decide final result AFTER spin
+      if (firstSpin) {
+        ideaBox.innerText = "Intense Makeout 💋";
+        firstSpin = false;
+      } else {
+        ideaBox.innerText = dateIdeas[Math.floor(Math.random() * dateIdeas.length)];
+      }
+
+      ideaBox.style.transform = "scale(1.2)";
+      setTimeout(() => ideaBox.style.transform = "scale(1)", 200);
+    }
+
+  }, 80);
+}
+</script>
+</body>
+</html>
